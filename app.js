@@ -1,0 +1,37 @@
+
+function createNewAccount() {
+    location = "./Sign Up/index.html";
+}
+
+let emails = localStorage.getItem("emails");
+emails = JSON.parse(emails);
+let passwords = localStorage.getItem("passwords");
+passwords = JSON.parse(passwords);
+
+let index = [];
+
+function login() {
+    let currentEmail = document.getElementById("email");
+    let currentPassword = document.getElementById("password");
+    let isEmailFound = false;
+    let passwordIndex = -1;
+
+    if(currentEmail.value == "" || currentPassword.value == "") {
+        return;
+    }
+
+    for(let i = 0; i < emails.length; i++) {
+        if(currentEmail.value === emails[i]) {
+            isEmailFound = true;
+            passwordIndex = i;
+        }
+    }
+
+    if(currentPassword.value === passwords[passwordIndex]) {
+        event.preventDefault();
+        localStorage.setItem("index", JSON.stringify(passwordIndex));
+        location = "./Post/index.html";
+    } else {
+        alert(`Wrong credentials, Invalid username or password`);
+    }
+}
